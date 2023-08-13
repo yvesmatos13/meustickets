@@ -4,10 +4,7 @@ from persistence.mongodb import connection, sequences
 
 async def criar_evento(evento: Evento):
     evento = evento.dict()
-    evento["id"] = await gerarId()
-    evento = {"_id": evento["id"],
-              "nome": evento["nome"],
-              "tipo": evento["tipo"]}
+    evento["_id"] = await gerarId()
     evento = connection().insert_one(evento)
 
     return await buscar_evento(evento.inserted_id)
@@ -22,9 +19,9 @@ async def gerarId():
 async def buscar_eventos():
     eventos = []
     for evento in connection().find():
-        evento = {"id": evento["_id"],
-                  "nome": evento["nome"],
-                  "tipo": evento["tipo"]}
+        evento["id"] = evento.pop("_id")
+        id = {'id': evento["id"]}
+        evento = {**id, **evento}
         eventos.append(evento)
 
     return eventos
@@ -34,9 +31,9 @@ async def buscar_evento(evento_id: int):
     evento = connection().find_one({"_id": evento_id})
     if not evento:
         raise HTTPException(status_code=404, detail="Evento não encontrado")
-    evento = {"id": evento["_id"],
-              "nome": evento["nome"],
-              "tipo": evento["tipo"]}
+    evento["id"] = evento.pop("_id")
+    id = {'id': evento["id"]}
+    evento = {**id, **evento}
     
     return evento
 
