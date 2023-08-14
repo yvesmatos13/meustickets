@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException
 
 from service import evento as eventoServico
-from schemas.evento import Evento, Evento_Update, Evento_Response
+from schemas.evento import Evento_Request, Evento_Update_Request, Evento_Response
 from schemas.excecoes import Excecao_Negocio, Excecao_Infra_Estrutura
 
 router = APIRouter(
@@ -14,7 +14,7 @@ router = APIRouter(
 )
 
 @router.post("/evento")
-async def criar_evento(evento: Evento) -> Evento_Response:
+async def criar_evento(evento: Evento_Request) -> Evento_Response:
     return await eventoServico.criar_evento(evento)
 
 @router.get("/eventos")
@@ -26,7 +26,7 @@ async def buscar_evento(evento_id: int) -> Evento_Response:
     return await eventoServico.buscar_evento(evento_id)
 
 @router.put("/evento/editar")
-async def editar_evento(evento: Evento_Update) -> Evento_Response:
+async def editar_evento(evento: Evento_Update_Request) -> Evento_Response:
     return await eventoServico.editar_evento(evento)
 
 @router.delete("/evento/{evento_id}", status_code=200)

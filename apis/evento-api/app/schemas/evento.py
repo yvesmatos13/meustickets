@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 from datetime import date, datetime, time, timedelta
 
-class Evento(BaseModel):
+class Evento_Request(BaseModel):
     nome: str
     tipo: str
     cep: str
@@ -20,7 +20,7 @@ class Evento(BaseModel):
     data_fim: date
     hora_fim: time
 
-class Evento_Update(BaseModel):
+class Evento_Update_Request(BaseModel):
     id: int
     nome: str
     tipo: str
@@ -59,3 +59,17 @@ class Evento_Response(BaseModel):
     hora_inicio: time
     data_fim: date
     hora_fim: time
+
+def evento_request(evento: Evento_Request):
+        evento["data_inicio"] = str(evento["data_inicio"])
+        evento["hora_inicio"] = str(evento["hora_inicio"])
+        evento["data_fim"] = str(evento["data_fim"])
+        evento["hora_fim"] = str(evento["hora_fim"])
+        return evento
+
+def evento_update_request(evento: Evento_Update_Request):
+        evento["data_inicio"] = str(evento["data_inicio"])
+        evento["hora_inicio"] = str(evento["hora_inicio"])
+        evento["data_fim"] = str(evento["data_fim"])
+        evento["hora_fim"] = str(evento["hora_fim"])
+        return evento

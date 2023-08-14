@@ -1,7 +1,7 @@
 from pymongo import MongoClient
 import json
 
-with open("../resource/appsettings.json") as user_file:
+with open("appsettings.json") as user_file:
       file_contents = user_file.read()
 
 appsettings = json.loads(file_contents)
