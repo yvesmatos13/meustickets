@@ -5,7 +5,7 @@ from schemas.evento import Evento, Evento_Update, Evento_Response
 from schemas.excecoes import Excecao_Negocio, Excecao_Infra_Estrutura
 
 router = APIRouter(
-    #prefix="/eventos",
+    prefix="/api/v1",
     tags=["eventos"],
     responses= {
         400: {"model": Excecao_Negocio, "description": "Exceção de negócio"},
