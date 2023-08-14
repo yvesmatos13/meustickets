@@ -1,5 +1,5 @@
 from fastapi import APIRouter, HTTPException
-from schemas.evento import Evento_Request, Evento_Update_Request, evento_request
+from schemas.evento import Evento_Request, Evento_Update_Request, evento_request, evento_update_request
 from schemas.excecoes import excecao_negocio, excecao_infraEstrutura, excecao_infraEstrutura_timeout
 from persistence.mongodb import connection, sequences
 from exceptions.handler import ExcecaoNegocioException, ExcecaoInfraEstruturaException, ExcecaoInfraEstruturaTimeoutException
@@ -80,6 +80,7 @@ async def buscar_evento(evento_id: int):
 async def editar_evento(evento: Evento_Update_Request):
     evento = evento.dict()
     await buscar_evento(evento['id'])
+    evento_update_request(evento)
     try:    
         connection().find_one_and_update(
             {'_id': evento["id"]},

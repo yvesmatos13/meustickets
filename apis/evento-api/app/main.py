@@ -1,6 +1,6 @@
 from typing import Union
 
-from routers import evento
+import routers.evento as evento
  
 from fastapi import FastAPI
 
