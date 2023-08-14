@@ -2,7 +2,7 @@ from fastapi import APIRouter, HTTPException
 
 from service import evento as eventoServico
 from schemas.evento import Evento, Evento_Update, Evento_Response
-from schemas.handler import Excecao_Negocio, Excecao_Infra_Estrutura
+from schemas.excecoes import Excecao_Negocio, Excecao_Infra_Estrutura
 
 router = APIRouter(
     #prefix="/eventos",

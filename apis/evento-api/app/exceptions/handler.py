@@ -1,6 +1,6 @@
 from fastapi import FastAPI, HTTPException, status, Request
 from fastapi.responses import JSONResponse
-from schemas.handler import Excecao_Negocio, Excecao_Infra_Estrutura
+from schemas.excecoes import Excecao_Negocio, Excecao_Infra_Estrutura
 
 class ExcecaoNegocioException(HTTPException):
     pass

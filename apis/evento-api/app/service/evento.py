@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException
 from schemas.evento import Evento, Evento_Update
-from schemas.handler import excecao_negocio, excecao_infraEstrutura, excecao_infraEstrutura_timeout
+from schemas.excecoes import excecao_negocio, excecao_infraEstrutura, excecao_infraEstrutura_timeout
 from persistence.mongodb import connection, sequences
 from exceptions.handler import ExcecaoNegocioException, ExcecaoInfraEstruturaException, ExcecaoInfraEstruturaTimeoutException
 
