@@ -1,13 +1,15 @@
-FROM docker.io/python:3.10.6
+FROM python:latest
 
 WORKDIR /app
  
-COPY ./* ./
+COPY ./ ./
 
-RUN pip install -r requirements.txt
+RUN pip install --root-user-action=ignore --upgrade pip
+
+RUN pip install --root-user-action=ignore --no-cache-dir --upgrade -r requirements.txt
 
 RUN rm requirements.txt Dockerfile
 
 EXPOSE 8000
 
-ENTRYPOINT ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
