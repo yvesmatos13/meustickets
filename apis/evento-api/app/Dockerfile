@@ -4,6 +4,8 @@ WORKDIR /app
  
 COPY ./ ./
 
+RUN apt-get update && apt-get install -y vim
+
 RUN pip install --root-user-action=ignore --upgrade pip
 
 RUN pip install --root-user-action=ignore --no-cache-dir --upgrade -r requirements.txt
