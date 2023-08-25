@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from datetime import date, datetime, time, timedelta
 
 class Evento_Request(BaseModel):
@@ -16,9 +16,9 @@ class Evento_Request(BaseModel):
     categoria: str = None
     descricao: str = None
     data_inicio: date
-    hora_inicio: time
+    hora_inicio: time = Field(example="12:30")
     data_fim: date
-    hora_fim: time
+    hora_fim: time = Field(example="12:30")
 
 class Evento_Update_Request(BaseModel):
     id: int
@@ -36,9 +36,9 @@ class Evento_Update_Request(BaseModel):
     categoria: str = None
     descricao: str = None
     data_inicio: date
-    hora_inicio: time
+    hora_inicio: time = Field(example="12:30")
     data_fim: date
-    hora_fim: time
+    hora_fim: time = Field(example="12:30")
 
 class Evento_Response(BaseModel):
     id: int
@@ -59,6 +59,10 @@ class Evento_Response(BaseModel):
     hora_inicio: time
     data_fim: date
     hora_fim: time
+
+class Evento_Delete_Response(BaseModel):
+      codigo: int = 0
+      mensagem: str = "Evento deletado com sucesso"
 
 def evento_request(evento: Evento_Request):
         evento["data_inicio"] = str(evento["data_inicio"])

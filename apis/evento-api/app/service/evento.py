@@ -1,5 +1,5 @@
 from fastapi import APIRouter, HTTPException
-from schemas.evento import Evento_Request, Evento_Update_Request, evento_request, evento_update_request
+from schemas.evento import Evento_Request, Evento_Update_Request, Evento_Delete_Response, evento_request, evento_update_request
 from schemas.excecoes import excecao_negocio, excecao_infraEstrutura, excecao_infraEstrutura_timeout
 from persistence.mongodb import connection, sequences
 from exceptions.handler import ExcecaoNegocioException, ExcecaoInfraEstruturaException, ExcecaoInfraEstruturaTimeoutException
@@ -101,8 +101,7 @@ async def deletar_evento(evento_id: int):
     await buscar_evento(evento_id)
     try:
         connection().delete_one({"_id": evento_id})
-
-        return {"detail": "Evento deletado com sucesso"}
+        return Evento_Delete_Response()
     
     except Exception as e:
         excecao = str(e.args)
